@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/exploded-aar/android-auto-update/library/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="794df9b974ca5d71a01618755f5e404277864cd9">
+        <dex dex="/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/pre-dexed/debug/android-auto-update-library-unspecified_4ce0e36c4081d724222a2c418db2b1dc18754e66.jar" />
+    </item>
+
+</items>
