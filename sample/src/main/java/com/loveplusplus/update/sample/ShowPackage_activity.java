@@ -21,9 +21,10 @@ import java.util.List;
  * Created by max-fzf on 26.03.16.
  */
 public class ShowPackage_activity extends Activity {
-    private static Context mContext ;
+    private static Context mContext;
     Process localProcess = null;
     public String fullname;
+    ArrayList<HashMap<String, Object>> applist = new ArrayList<HashMap<String, Object>>();
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
          String fullname;
@@ -31,19 +32,15 @@ public class ShowPackage_activity extends Activity {
          SharedPreferences spref = getPreferences(MODE_PRIVATE);
          SharedPreferences.Editor editor = spref.edit();
          mContext = this.getApplicationContext();
-        ArrayList<HashMap<String, Object>> applist = new ArrayList<HashMap<String, Object>>();
         List<PackageInfo> packages = getPackageManager().getInstalledPackages(0);
         for (int i = 0; i < packages.size(); i++) {
             PackageInfo packageInfo = packages.get(i);
             AppInfo tmpinfo = new AppInfo();
             HashMap<String, Object> map = new HashMap<String, Object>();
             if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == ApplicationInfo.FLAG_SYSTEM) {//过滤掉系统程序
-               // Log.d("System software", "We met System " + i + "th software: " + packageInfo.packageName);
+                // Log.d("System software", "We met System " + i + "th software: " + packageInfo.packageName);
                 continue;
             }
-
-
-
 
 
             PackageInfo packageinfo = null;
@@ -63,23 +60,24 @@ public class ShowPackage_activity extends Activity {
             // 通过getPackageManager()的queryIntentActivities方法遍历
             List<ResolveInfo> resolveinfoList = getPackageManager()
                     .queryIntentActivities(resolveIntent, 0);
-
-            ResolveInfo resolveinfo = resolveinfoList.iterator().next();
+            if (resolveinfoList.iterator().hasNext()) {
+                ResolveInfo resolveinfo = resolveinfoList.iterator().next();
             if (resolveinfo != null) {
                 // packagename = 参数packname
                 String packageName = resolveinfo.activityInfo.packageName;
                 // 这个就是我们要找的该APP的LAUNCHER的Activity[组织形式：packagename.mainActivityname]
                 fullname = resolveinfo.activityInfo.name;
-                Log.d("##############","Activityname:"+fullname);
-                map.put("packagename",fullname);
+                Log.d("##############", "Activityname:" + fullname);
+                map.put("packagename", fullname);
             }
 
             map.put("appicon", packageInfo.applicationInfo.loadIcon(getPackageManager()).getCurrent());
             map.put("appname", tmpinfo.appName = packageInfo.applicationInfo.loadLabel(getPackageManager()).toString());
-           // String fullname=packageInfo.packageName.toString()+packageInfo.applicationInfo.className.toString();
+            // String fullname=packageInfo.packageName.toString()+packageInfo.applicationInfo.className.toString();
             //map.put("packagename", tmpinfo.packagename = packageInfo.applicationInfo.className.toString());
-            map.put("ItemButton",R.drawable.android_logo);
+            map.put("ItemButton", R.drawable.android_logo);
             applist.add(map);
+        }
         }
         ListView listView = (ListView) findViewById(R.id.listView);
         // SimpleAdapter listadapter = new SimpleAdapter(this, applist, R.layout.simple, new String[]{"appicon", "appname", "packagename"}, new int[]{R.id.ItemImage, R.id.ItemName, R.id.ItemInfo});
@@ -94,19 +92,6 @@ public class ShowPackage_activity extends Activity {
                 mContext
         );
         listView.setAdapter(listItemAdapter);
-
-        /*
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(
-                        ShowPackage_activity.this,
-                        "Postion:" + position,
-                        Toast.LENGTH_LONG).show();
-
-            }
-        });
-     */
     }
 
 
@@ -140,9 +125,29 @@ public class ShowPackage_activity extends Activity {
               a[i]='/';
             }
         }
-        Log.d("22222222222222","2222222222222");
         String after="L"+new String(a)+";,VL,onCreate,Lcom/example/max_fzf/hook/MainActivity;,VL,onCreate";
         MainActivity.handle(after);
-        Log.d("!!!!!!!!!!!!!!!!","After:"+after);
+    }
+    public static void App_disable_rewrite(Context ctx, ArrayList<HashMap<String, Object>> appList) throws IOException {
+          Log.d("注意！！！","Disable_app 补丁被重新写入！");
+            SharedPreferences spref = ctx.getSharedPreferences("ShowPackage_activity", Context.MODE_PRIVATE);
+            MainActivity.Delete_df_file();
+            for (int i = 0; i < appList.size(); i++) {
+                HashMap<String, Object> appInfo = appList.get(i);
+                String info = (String) appInfo.get("packagename");
+                boolean boolvalue = spref.getBoolean(info, false);
+                Log.d("注意！",info+"="+boolvalue);
+                if (boolvalue) {
+                    char[] a = info.toCharArray();
+                    for (int j = 0; j < a.length; j++) {
+                        if (a[j] == '.') {
+                            a[j] = '/';
+                        }
+                    }
+                    String after = "L" + new String(a) + ";,VL,onCreate,Lcom/example/max_fzf/hook/MainActivity;,VL,onCreate";
+                    MainActivity.handle(after);
+                }
+            }
+
     }
 }

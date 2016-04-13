@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/media/max-fzf/TianCaiFZF/android-auto-update/library/src/main/assets"/></dataSet><dataSet config="debug"><source path="/media/max-fzf/TianCaiFZF/android-auto-update/library/src/debug/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/library/src/main/assets"/></dataSet><dataSet config="debug"><source path="/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/library/src/debug/assets"/></dataSet></merger>

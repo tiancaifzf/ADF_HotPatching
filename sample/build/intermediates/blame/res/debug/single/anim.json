@@ -1,26 +1,26 @@
 [
     {
-        "merged": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/res/merged/debug/anim/abc_slide_in_bottom.xml",
-        "source": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_slide_in_bottom.xml"
+        "merged": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/res/merged/debug/anim/abc_slide_in_top.xml",
+        "source": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_slide_in_top.xml"
     },
     {
-        "merged": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/res/merged/debug/anim/abc_slide_out_bottom.xml",
-        "source": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_slide_out_bottom.xml"
+        "merged": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/res/merged/debug/anim/abc_fade_out.xml",
+        "source": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_fade_out.xml"
     },
     {
-        "merged": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/res/merged/debug/anim/abc_fade_in.xml",
-        "source": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_fade_in.xml"
+        "merged": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/res/merged/debug/anim/abc_slide_in_bottom.xml",
+        "source": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_slide_in_bottom.xml"
     },
     {
-        "merged": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/res/merged/debug/anim/abc_slide_in_top.xml",
-        "source": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_slide_in_top.xml"
+        "merged": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/res/merged/debug/anim/abc_slide_out_bottom.xml",
+        "source": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_slide_out_bottom.xml"
     },
     {
-        "merged": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/res/merged/debug/anim/abc_slide_out_top.xml",
-        "source": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_slide_out_top.xml"
+        "merged": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/res/merged/debug/anim/abc_slide_out_top.xml",
+        "source": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_slide_out_top.xml"
     },
     {
-        "merged": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/res/merged/debug/anim/abc_fade_out.xml",
-        "source": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_fade_out.xml"
+        "merged": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/res/merged/debug/anim/abc_fade_in.xml",
+        "source": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_fade_in.xml"
     }
 ]

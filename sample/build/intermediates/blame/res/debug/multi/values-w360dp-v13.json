@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/res/merged/debug/values-w360dp-v13/values-w360dp-v13.xml",
+        "outputFile": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/res/merged/debug/values-w360dp-v13/values-w360dp-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 105
                 },
                 "from": {
-                    "file": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values-w360dp/values.xml",
+                    "file": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values-w360dp/values.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,

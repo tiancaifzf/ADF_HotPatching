@@ -1,38 +1,38 @@
 [
     {
-        "merged": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/res/merged/debug/color/abc_secondary_text_material_light.xml",
-        "source": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_secondary_text_material_light.xml"
+        "merged": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/res/merged/debug/color/abc_primary_text_material_light.xml",
+        "source": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_primary_text_material_light.xml"
     },
     {
-        "merged": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/res/merged/debug/color/abc_primary_text_disable_only_material_dark.xml",
-        "source": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_primary_text_disable_only_material_dark.xml"
+        "merged": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/res/merged/debug/color/abc_primary_text_material_dark.xml",
+        "source": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_primary_text_material_dark.xml"
     },
     {
-        "merged": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/res/merged/debug/color/abc_primary_text_material_light.xml",
-        "source": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_primary_text_material_light.xml"
+        "merged": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/res/merged/debug/color/abc_secondary_text_material_dark.xml",
+        "source": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_secondary_text_material_dark.xml"
     },
     {
-        "merged": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/res/merged/debug/color/abc_primary_text_material_dark.xml",
-        "source": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_primary_text_material_dark.xml"
+        "merged": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/res/merged/debug/color/abc_primary_text_disable_only_material_dark.xml",
+        "source": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_primary_text_disable_only_material_dark.xml"
     },
     {
-        "merged": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/res/merged/debug/color/abc_background_cache_hint_selector_material_light.xml",
-        "source": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_background_cache_hint_selector_material_light.xml"
+        "merged": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/res/merged/debug/color/abc_primary_text_disable_only_material_light.xml",
+        "source": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_primary_text_disable_only_material_light.xml"
     },
     {
-        "merged": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/res/merged/debug/color/abc_background_cache_hint_selector_material_dark.xml",
-        "source": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_background_cache_hint_selector_material_dark.xml"
+        "merged": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/res/merged/debug/color/abc_search_url_text.xml",
+        "source": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_search_url_text.xml"
     },
     {
-        "merged": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/res/merged/debug/color/abc_secondary_text_material_dark.xml",
-        "source": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_secondary_text_material_dark.xml"
+        "merged": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/res/merged/debug/color/abc_secondary_text_material_light.xml",
+        "source": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_secondary_text_material_light.xml"
     },
     {
-        "merged": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/res/merged/debug/color/abc_search_url_text.xml",
-        "source": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_search_url_text.xml"
+        "merged": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/res/merged/debug/color/abc_background_cache_hint_selector_material_dark.xml",
+        "source": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_background_cache_hint_selector_material_dark.xml"
     },
     {
-        "merged": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/res/merged/debug/color/abc_primary_text_disable_only_material_light.xml",
-        "source": "/media/max-fzf/TianCaiFZF/android-auto-update/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_primary_text_disable_only_material_light.xml"
+        "merged": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/res/merged/debug/color/abc_background_cache_hint_selector_material_light.xml",
+        "source": "/media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_background_cache_hint_selector_material_light.xml"
     }
 ]

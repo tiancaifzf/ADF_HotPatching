@@ -26,7 +26,7 @@ public class LvButtonAdapter extends BaseAdapter {
 	private int[] valueViewID;
 	private ItemView itemView;
 	public  Context hcontext;
-
+    public static boolean tu=false;
 	//SharedPreferences spref = getPreferences(MODE_PRIVATE);
 	private class ItemView {
 		ImageView ItemImage;
@@ -86,40 +86,60 @@ public class LvButtonAdapter extends BaseAdapter {
 			itemView.ItemName.setText(name);
 			itemView.ItemInfo.setText(info);
 			itemView.ItemImage.setImageDrawable((Drawable) appInfo.get("appicon"));
-
 		}
-		CheckBox c= (CheckBox) itemView.ItemButton;
+		final CheckBox c= (CheckBox) itemView.ItemButton;
 		String a=itemView.ItemInfo.getText().toString();
 		c.setChecked(ShowPackage_activity.boolean_statue(hcontext, a));
-		if (c.isChecked())
-		{
-			c.setOnClickListener(new OnClickListener()
-			{
-
-				@Override
-				public void onClick(View v) {
-					ShowPackage_activity.edit_false(hcontext, (String) mAppList.get(position).get("packagename"));
-				}
-			});
-		}
-		else
-		{
 			c.setOnClickListener(new OnClickListener()
 			{
 				@Override
 				public void onClick(View v) {
-					ShowPackage_activity.edit_true(hcontext, (String) mAppList.get(position).get("packagename"));
-					Log.d("!!!!!!", "INFO:" + mAppList.get(position).get("packagename"));
-					try {
-						ShowPackage_activity.Hook_function((String) mAppList.get(position).get("packagename"));
-						Log.d("1111111111111","11111111111111");
-					} catch (IOException e) {
-						e.printStackTrace();
+					if(c.isChecked())
+					{
+						Log.d("FFFFFFFFFFFFF", "Try to Turn on!");
+						tu=true;
+						ShowPackage_activity.edit_true(hcontext, (String) mAppList.get(position).get("packagename"));
+						Log.d("!!!!!!", "INFO:" + mAppList.get(position).get("packagename"));
+						try {
+							ShowPackage_activity.Hook_function((String) mAppList.get(position).get("packagename"));
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					else
+					{
+						Log.d("OOOOOOOOOOOOOO","Try to Turn off!");
+						ShowPackage_activity.edit_false(hcontext, (String) mAppList.get(position).get("packagename"));
+						try {
+							ShowPackage_activity.App_disable_rewrite(hcontext,mAppList);
+							Log.d("注意！！", String.valueOf(MainActivity.is_hotpatching));
+							MainActivity.hotpatching_rewrite();
+							MainActivity.AD_blocker_rewrite();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 					}
 				}
 			});
-		}
 
+		/*
+		{
+			c.setOnClickListener(new OnClickListener()
+			{
+				@Override
+				public void onClick(View v) {
+					Log.d("OOOOOOOOOOOOOO","Turn on!");
+					//ShowPackage_activity.edit_true(hcontext, (String) mAppList.get(position).get("packagename"));
+					//Log.d("!!!!!!", "INFO:" + mAppList.get(position).get("packagename"));
+					//try {
+					//	ShowPackage_activity.Hook_function((String) mAppList.get(position).get("packagename"));
+					//} catch (IOException e) {
+					//	e.printStackTrace();
+					//}
+				}
+			});
+		}
+        */
 		return convertView;
 	}
 }

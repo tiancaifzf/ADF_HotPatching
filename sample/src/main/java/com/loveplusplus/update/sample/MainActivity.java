@@ -27,6 +27,10 @@ import java.io.OutputStream;
 public class MainActivity extends ActionBarActivity
 {
     //public boolean ischecked;
+    public static boolean is_hotpatching=false;
+    public static boolean is_ADblocker=false;
+    public static String result;
+    public String AD_resources;
      Process localProcess = null;
     private static Context mContext ;
      OutputStream localOutputStream = null;
@@ -38,19 +42,72 @@ public class MainActivity extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-            UpdateChecker.checkForDialog(MainActivity.this, APP_UPDATE_SERVER_URL,MainActivity.this);
-        Log.d("!!!!!!!!!!!", "44444444444");
+        mContext=this.getApplicationContext();
+        UpdateChecker.checkForDialog(MainActivity.this, APP_UPDATE_SERVER_URL,MainActivity.this);
+           /*
             if(UpdateChecker.error()){
+                Log.d("!!!!!!!!!!!", "沒有網路連接！");
                 Toast.makeText(mContext, "沒有網路連接！", Toast.LENGTH_SHORT).show();
             }
+           */
         SharedPreferences spref = getPreferences(MODE_PRIVATE);
-        final SharedPreferences.Editor editor = spref.edit();
+        final  SharedPreferences.Editor editor = spref.edit();
         Switch ss=(Switch)findViewById(R.id.switch1);
         final boolean boolvalue=spref.getBoolean("KEY_Boolean",false);
         ss.setChecked(boolvalue);
         Button rb= (Button) findViewById(R.id.button);
         Button jump= (Button) findViewById(R.id.button2);
         Button check= (Button) findViewById(R.id.button3);
+        Button test_button= (Button) findViewById(R.id.button4);
+
+        test_button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                AD_Resources_Analysis Operator=new AD_Resources_Analysis();
+                try {
+                    AD_resources=Operator.Operator();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Log.d("廣告讀入！！",AD_resources);
+                try {
+                    localProcess = Runtime.getRuntime().exec("su");
+                    localOutputStream = localProcess.getOutputStream();
+                    DataOutputStream localDataOutputStream = new DataOutputStream(localOutputStream);
+                    localDataOutputStream.writeBytes("mount -o remount,rw /system\n");
+                    localDataOutputStream.writeBytes("mv sdcard/Android/data/com.loveplusplus.update.sample/cache/hook.apk /system/dynamic_framework/hook.apk\n");
+                    localDataOutputStream.writeBytes("echo \"" +AD_resources+"\" >> /system/df_file\n");
+                    localDataOutputStream.writeBytes("mount -o remount,ro /system\n");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                /*
+                Analysis_df_file operator=new Analysis_df_file();
+                try {
+                     result=operator.Operator();
+                    Log.d("他走到了这样一部！！！！",result);
+                    is_hotpatching=true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    localProcess = Runtime.getRuntime().exec("su");
+                    localOutputStream = localProcess.getOutputStream();
+                    DataOutputStream localDataOutputStream = new DataOutputStream(localOutputStream);
+                    localDataOutputStream.writeBytes("mount -o remount,rw /system\n");
+                   // localDataOutputStream.writeBytes("mv sdcard/Android/data/com.loveplusplus.update.sample/cache/hook.apk /system/dynamic_framework/hook.apk\n");
+                    localDataOutputStream.writeBytes("echo \"" +result+"\" >> /system/df_file\n");
+                    localDataOutputStream.writeBytes("mount -o remount,ro /system\n");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            */}
+        });
+
+
+
+
         check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,17 +119,24 @@ public class MainActivity extends ActionBarActivity
                     e.printStackTrace();
                 }
 
+                Analysis_df_file operator=new Analysis_df_file();
+                try {
+                    String result=operator.Operator();
+                    Log.d("NOTICE!!!!",result);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 try {
                     localProcess = Runtime.getRuntime().exec("su");
                     localOutputStream = localProcess.getOutputStream();
                     DataOutputStream localDataOutputStream = new DataOutputStream(localOutputStream);
                     localDataOutputStream.writeBytes("mount -o remount,rw /system\n");
                     localDataOutputStream.writeBytes("mv sdcard/Android/data/com.loveplusplus.update.sample/cache/hook.apk /system/dynamic_framework/hook.apk\n");
-                    localDataOutputStream.writeBytes("mv sdcard/Android/data/com.loveplusplus.update.sample/cache/df_file /system/df_file\n");
+                    localDataOutputStream.writeBytes("echo \"" +result+"\" >> /system/df_file\n");
                     localDataOutputStream.writeBytes("mount -o remount,ro /system\n");
                 } catch (IOException e) {
                     e.printStackTrace();
-
                 }
 
                 File fexit=new File("/system/dynamic_framework/hook.apk");
@@ -117,20 +181,35 @@ public class MainActivity extends ActionBarActivity
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     try {
-                        Log.d("@@@@@","11111");
+                        is_hotpatching=true;
                         localProcess = Runtime.getRuntime().exec("su");
-                        Log.d("@@@@@","22222");
                         localOutputStream = localProcess.getOutputStream();
                         DataOutputStream localDataOutputStream = new DataOutputStream(localOutputStream);
-                        String path = "\"Lcom/antutu/ABenchMark/ABenchMarkStart;,VL,onCreate,Lcom/example/max_fzf/hook/MainActivity;,VL,onCreate\"";
                         localDataOutputStream.writeBytes("mount -o remount,rw /system\n");
-                        localDataOutputStream.writeBytes("rm -r /system/df_file\n");
-                        localDataOutputStream.writeBytes("echo \"Lcom/unity3d/ads/android/UnityAds;,Z,canShow,Lcom/example/max_fzf/hook/MainActivity;,Z,canShow\" > /system/df_file\n");
-                        localDataOutputStream.writeBytes("echo \"Lcom/google/android/gms/ads/AdView;,VL,loadAd,Lcom/example/max_fzf/hook/MainActivity;,VL,deleteAd\" >> /system/df_file\n");
+                        //localDataOutputStream.writeBytes("rm -r /system/df_file\n");
+                        //Unity 广告
+                      //  localDataOutputStream.writeBytes("echo \"Lcom/unity3d/ads/android/view/UnityAdsFUllscreenActivity;,VL,loadAds,Lcom/example/max_fzf/hook/MainActivity;,VL,deleteAd\" >> /system/df_file\n");
+                       // localDataOutputStream.writeBytes("echo \"Lcom/unity3d/ads/android/UnityAds;,Z,canShow,Lcom/example/max_fzf/hook/MainActivity;,Z,canShow\" > /system/df_file\n");
+                        //Google 广告
+                      //  localDataOutputStream.writeBytes("echo \"Lcom/google/android/gms/ads/AdView;,VL,loadAd,Lcom/example/max_fzf/hook/MainActivity;,VL,deleteAd\" >> /system/df_file\n");
+                        //MoPub 广告
+                       // localDataOutputStream.writeBytes("echo \"Lcom/mopub/mobileads/MoPubView;,V,loadAd,Lcom/example/max_fzf/hook/MainActivity;,V,deleteAd1\" >> /system/df_file\n");
+                       // localDataOutputStream.writeBytes("echo \"Lcom/mopub/mobileads/MoPubActivity;,VL,load,Lcom/example/max_fzf/hook/MainActivity;,VL,deleteAd\" >> /system/df_file\n");
+                       // localDataOutputStream.writeBytes("echo \"Lcom/mopub/nativeads/MraidActivity;,VL,loadAds,Lcom/example/max_fzf/hook/MainActivity;,VL,deleteAd\" >> /system/df_file\n");
+                       // localDataOutputStream.writeBytes("echo \"Lcom/mopub/nativeads/MraidVideoPlayerActivity;,VL,loadAds,Lcom/example/max_fzf/hook/MainActivity;,VL,deleteAd\" >> /system/df_file\n");
+                        //Facebook 广告
+                       // localDataOutputStream.writeBytes("echo \"Lcom/facebook/ads/InterstitialAd;,V,loadAd,Lcom/example/max_fzf/hook/MainActivity;,V,deleteAd1\" >> /system/df_file\n");
+                       //  localDataOutputStream.writeBytes("echo \"Lcom/facebook/ads/AdView;,V,loadAd,Lcom/example/max_fzf/hook/MainActivity;,V,deleteAd1\" >> /system/df_file\n");
+                       // localDataOutputStream.writeBytes("echo \"Lcom/facebook/ads/AdView;,V,setAdListener,Lcom/example/max_fzf/hook/MainActivity;,V,deleteAd1\" >> /system/df_file\n");
+                        //.writeBytes("echo \"Lcom/facebook/ads/NativeAd;,Z,isAdLoaded,Lcom/example/max_fzf/hook/MainActivity;,Z,isAdLoaded\" >> /system/df_file\n");
+                        //localDataOutputStream.writeBytes("echo \"Lcom/facebook/ads/NativeAd;,V,loadAd,Lcom/example/max_fzf/hook/MainActivity;,V,deleteAd1\" >> /system/df_file\n");
+                        //localDataOutputStream.writeBytes("echo \"Lcom/cmcm/adsdk/interstitial/PicksInterstitialActivity;,VL,loadAds,Lcom/example/max_fzf/hook/MainActivity;,VL,deleteAd\" >> /system/df_file\n");
+                        //其他類廣告
+                        //localDataOutputStream.writeBytes("echo \"Lcom/cmcm/adsdk/interstitial/PicksInterstitialActivity;,Z,isAdLoaded,Lcom/example/max_fzf/hook/MainActivity;,Z,isAdLoaded\" >> /system/df_file\n");
+                        //localDataOutputStream.writeBytes("echo \"Lcom/cmcm/picks/PicksLoadingActivity;,Z,isAdLoaded,Lcom/example/max_fzf/hook/MainActivity;,Z,isAdLoaded\" >> /system/df_file\n");
+
                         localDataOutputStream.writeBytes("chmod 644 /system/df_file\n");
                         localDataOutputStream.writeBytes("mount -o remount,ro /system\n");
-                        Log.d("@@@@@", "33333");
-                        //isChecked=true;
                         editor.putBoolean("KEY_Boolean", true);
                         editor.apply();
                         editor.commit();
@@ -140,13 +219,16 @@ public class MainActivity extends ActionBarActivity
                     }
                 } else {
                     try {
+                        is_ADblocker=false;
                         localProcess = Runtime.getRuntime().exec("su");
                         localOutputStream = localProcess.getOutputStream();
                         DataOutputStream localDataOutputStream = new DataOutputStream(localOutputStream);
                         String path = "\"Lcom/antutu/ABenchMark/ABenchMarkStart;,VL,onCreate,Lcom/example/max_fzf/hook/MainActivity;,VL,onCreate\"";
                         localDataOutputStream.writeBytes("mount -o remount,rw /system\n");
                         localDataOutputStream.writeBytes("rm -r /system/df_file\n");
-                        //isChecked=false;
+                        Rewrite_df_file r=new Rewrite_df_file();
+                        r.Hot_patching_rewrite();
+                        //ShowPackage_activity.App_disable_rewrite();
                         editor.putBoolean("KEY_Boolean", false);
                         editor.commit();
                         Log.d("ADF!!", "turn off !success!");
@@ -184,12 +266,11 @@ public class MainActivity extends ActionBarActivity
         Process localProcess = null;
         OutputStream localOutputStream = null;
         try {
-            Log.d("33333333333333333","333333333333333333"+packagename);
             localProcess = Runtime.getRuntime().exec("su");
             localOutputStream = localProcess.getOutputStream();
             DataOutputStream localDataOutputStream = new DataOutputStream(localOutputStream);
             localDataOutputStream.writeBytes("mount -o remount,rw /system\n");
-            localDataOutputStream.writeBytes("rm -r /system/df_file\n");
+            //localDataOutputStream.writeBytes("rm -r /system/df_file\n");
             localDataOutputStream.writeBytes("echo \"" +packagename+"\" >> /system/df_file\n");
             localDataOutputStream.writeBytes("chmod 644 /system/df_file\n");
             localDataOutputStream.writeBytes("mount -o remount,ro /system\n");
@@ -197,6 +278,68 @@ public class MainActivity extends ActionBarActivity
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public static void Delete_df_file() throws IOException {
+
+
+
+        Process localProcess = null;
+        OutputStream localOutputStream = null;
+        try {
+            localProcess = Runtime.getRuntime().exec("su");
+            localOutputStream = localProcess.getOutputStream();
+            DataOutputStream localDataOutputStream = new DataOutputStream(localOutputStream);
+            localDataOutputStream.writeBytes("mount -o remount,rw /system\n");
+            localDataOutputStream.writeBytes("rm -r /system/df_file\n");
+            localDataOutputStream.writeBytes("mount -o remount,ro /system\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void hotpatching_rewrite(){
+        if(is_hotpatching) {
+            Log.d("注意！！！","Hotpatching 补丁被重新写入！");
+            Process localProcess = null;
+            OutputStream localOutputStream = null;
+            try {
+                localProcess = Runtime.getRuntime().exec("su");
+                localOutputStream = localProcess.getOutputStream();
+                DataOutputStream localDataOutputStream = new DataOutputStream(localOutputStream);
+                localDataOutputStream.writeBytes("mount -o remount,rw /system\n");
+                localDataOutputStream.writeBytes("echo \"" + result + "\" >> /system/df_file\n");
+                localDataOutputStream.writeBytes("mount -o remount,ro /system\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            Log.d("注意！！！","Hotpatching 补丁没有被写入！！");
+        }
+    }
+    public static void AD_blocker_rewrite(){
+        Process localProcess = null;
+        OutputStream localOutputStream = null;
+        SharedPreferences spref = mContext.getSharedPreferences("MainActivity",MODE_PRIVATE);
+        final  SharedPreferences.Editor editor = spref.edit();
+        if(spref.getBoolean("KEY_Boolean",false))
+        {
+            Log.d("注意！！！","ADBlocker 补丁被重新写入！");
+            try {
+                localProcess = Runtime.getRuntime().exec("su");
+                localOutputStream = localProcess.getOutputStream();
+                DataOutputStream localDataOutputStream = new DataOutputStream(localOutputStream);
+                localDataOutputStream.writeBytes("mount -o remount,rw /system\n");
+                localDataOutputStream.writeBytes("echo \"Lcom/unity3d/ads/android/UnityAds;,Z,canShow,Lcom/example/max_fzf/hook/MainActivity;,Z,canShow\" >> /system/df_file\n");
+                localDataOutputStream.writeBytes("echo \"Lcom/google/android/gms/ads/AdView;,VL,loadAd,Lcom/example/max_fzf/hook/MainActivity;,VL,deleteAd\" >> /system/df_file\n");
+                localDataOutputStream.writeBytes("chmod 644 /system/df_file\n");
+                localDataOutputStream.writeBytes("mount -o remount,ro /system\n");
+                Log.d("ADF!!", "turn on !success!");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{Log.d("注意！！！","ADBlocker 没有补丁被写入！！");}
     }
 
 
