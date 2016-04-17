@@ -27,9 +27,6 @@ import android.util.Log;
 
 /**
  * Provides application storage paths
- *
- * @author Sergey Tarasevich (nostra13[at]gmail[dot]com)
- * @since 1.0.0
  */
 public final class StorageUtils {
 
@@ -44,9 +41,6 @@ public final class StorageUtils {
 	 * Returns application cache directory. Cache directory will be created on SD card
 	 * <i>("/Android/data/[app_package_name]/cache")</i> if card is mounted and app has appropriate permission. Else -
 	 * Android defines cache directory on device's file system.
-	 *
-	 * @param context Application context
-	 * @return Cache {@link File directory}
 	 */
 	public static File getCacheDirectory(Context context) {
 		File appCacheDir = null;

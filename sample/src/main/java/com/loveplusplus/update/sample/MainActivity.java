@@ -43,8 +43,19 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext=this.getApplicationContext();
-        UpdateChecker.checkForDialog(MainActivity.this, APP_UPDATE_SERVER_URL,MainActivity.this);
-           /*
+
+        if(UpdateChecker.isNetworkAvailable(mContext)) {
+            UpdateChecker.checkForDialog(MainActivity.this, APP_UPDATE_SERVER_URL, MainActivity.this);
+        }
+        else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setIcon(R.drawable.ic_launcher);
+            builder.setTitle("ADF Message");
+            builder.setMessage("沒有網絡連接！！");
+            builder.setNeutralButton("好的！",null);
+            builder.show();
+        }
+        /*
             if(UpdateChecker.error()){
                 Log.d("!!!!!!!!!!!", "沒有網路連接！");
                 Toast.makeText(mContext, "沒有網路連接！", Toast.LENGTH_SHORT).show();
@@ -60,6 +71,7 @@ public class MainActivity extends ActionBarActivity
         Button check= (Button) findViewById(R.id.button3);
         Button test_button= (Button) findViewById(R.id.button4);
 
+        //TEST button 測試Analysis_df_file 功能
         test_button.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -106,69 +118,81 @@ public class MainActivity extends ActionBarActivity
         });
 
 
-
-
+        //Hot pacthing button 監聽
         check.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 String filename="sdcard/Android/data/com.loveplusplus.update.sample/cache/hook.zip";
                 String path="sdcard/Android/data/com.loveplusplus.update.sample/cache/";
-                try {
-                    Unzip.unzip(filename,path);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                File f=new File(filename);
+                if(f.exists()) {
+                    try {
+                        Unzip.unzip(filename, path);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Analysis_df_file operator = new Analysis_df_file();
+                    try {
+                         result = operator.Operator();
+                        Log.d("NOTICE!!!!", result);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        localProcess = Runtime.getRuntime().exec("su");
+                        localOutputStream = localProcess.getOutputStream();
+                        DataOutputStream localDataOutputStream = new DataOutputStream(localOutputStream);
 
-                Analysis_df_file operator=new Analysis_df_file();
-                try {
-                    String result=operator.Operator();
-                    Log.d("NOTICE!!!!",result);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                        localDataOutputStream.writeBytes("mount -o remount,rw /system\n");
+                        localDataOutputStream.writeBytes("mv sdcard/Android/data/com.loveplusplus.update.sample/cache/hook.apk /system/dynamic_framework/hook.apk\n");
+                        localDataOutputStream.writeBytes("echo \"" + result + "\" >> /system/df_file\n");
+                        localDataOutputStream.writeBytes("mount -o remount,ro /system\n");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
-                try {
-                    localProcess = Runtime.getRuntime().exec("su");
-                    localOutputStream = localProcess.getOutputStream();
-                    DataOutputStream localDataOutputStream = new DataOutputStream(localOutputStream);
-                    localDataOutputStream.writeBytes("mount -o remount,rw /system\n");
-                    localDataOutputStream.writeBytes("mv sdcard/Android/data/com.loveplusplus.update.sample/cache/hook.apk /system/dynamic_framework/hook.apk\n");
-                    localDataOutputStream.writeBytes("echo \"" +result+"\" >> /system/df_file\n");
-                    localDataOutputStream.writeBytes("mount -o remount,ro /system\n");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                File fexit=new File("/system/dynamic_framework/hook.apk");
-                File df_file=new File("/system/df_file");
-                while(true)
-                {
-                    if (fexit.exists()&&df_file.exists()) {
-                        //Toast.makeText(getApplicationContext(),"Hot Patching Successful!\n Please Reboot!",Toast.LENGTH_SHORT).show();
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                        builder.setIcon(R.drawable.ic_launcher);
-                        builder.setTitle("ADF Message");
-                        builder.setMessage("补丁安装完成！");
-                        builder.setPositiveButton("现在重启", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                              reboot();
-                            }
-                        });
-                        builder.setNegativeButton("稍后重启", null);
-                        builder.show();
-                        break;
+                    File fexit = new File("/system/dynamic_framework/hook.apk");
+                    File df_file = new File("/system/df_file");
+                    while (true) {
+                        if (fexit.exists() && df_file.exists()) {
+                            //Toast.makeText(getApplicationContext(),"Hot Patching Successful!\n Please Reboot!",Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            builder.setIcon(R.drawable.ic_launcher);
+                            builder.setTitle("ADF Message");
+                            builder.setMessage("补丁安装完成！");
+                            builder.setPositiveButton("现在重启", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    reboot();
+                                }
+                            });
+                            builder.setNegativeButton("稍后重启", null);
+                            builder.show();
+                            break;
+                        }
                     }
                 }
-
+                else {
+                    Log.d("!!!!","BBBBB");
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setIcon(R.drawable.ic_launcher);
+                    builder.setTitle("ADF Message");
+                    builder.setMessage("沒有發現補丁！");
+                    builder.setNeutralButton("瞭解！",null);
+                    builder.show();
+                }
             }
         });
+        //跳轉到Show_Package 頁面
         jump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             jump();
             }
         });
+
+        //重啓系統
         rb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -176,6 +200,8 @@ public class MainActivity extends ActionBarActivity
                 reboot();
             }
         });
+        //AD_Block 功能（目前此功能暫時被寫到TEST button 下）
+        /*
         ss.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -238,7 +264,7 @@ public class MainActivity extends ActionBarActivity
                 }
             }
         });
-
+      */
     }
     public void reboot(){
         {

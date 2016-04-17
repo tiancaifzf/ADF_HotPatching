@@ -22,6 +22,10 @@ uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from /media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/src/main/AndroidManifest.xml:9:5-81
 	android:name
 		ADDED from /media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/src/main/AndroidManifest.xml:9:22-78
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/src/main/AndroidManifest.xml:10:5-79
+	android:name
+		ADDED from /media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/src/main/AndroidManifest.xml:10:22-76
 application
 ADDED from /media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/src/main/AndroidManifest.xml:11:5-29:19
 MERGED from [com.android.support:support-v4:21.0.3] /media/max-fzf/TianCaiFZF/New_APP/ADF_HotPatching_App/sample/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/AndroidManifest.xml:16:5-19

@@ -198,7 +198,7 @@ public class UpdateChecker extends Fragment {
 
 			if (apkCode > versionCode) {
 				if (mTypeOfNotice == NOTICE_NOTIFICATION) {
-					showNotification(updateMessage,apkUrl);
+					//showNotification(updateMessage,apkUrl);
 				} else if (mTypeOfNotice == NOTICE_DIALOG) {
 					showDialog(updateMessage,apkUrl);
 				}
@@ -211,11 +211,6 @@ public class UpdateChecker extends Fragment {
 			Log.e(TAG, "parse json error", e);
 		}
 	}
-
-	/**
-	 * Show dialog
-	 * 
-	 */
 	public void showDialog(String content,String apkUrl) {
         UpdateDialog d = new UpdateDialog();
 		Bundle args = new Bundle();
@@ -229,6 +224,7 @@ public class UpdateChecker extends Fragment {
 	 * Show Notification
 	 * 
 	 */
+	/*
 	public void showNotification(String content,String apkUrl) {
 		android.app.Notification noti;
 		Intent myIntent = new Intent(mContext, DownloadService.class);
@@ -245,6 +241,7 @@ public class UpdateChecker extends Fragment {
 		NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.notify(0, noti);
 	}
+	*/
 
 	
 
