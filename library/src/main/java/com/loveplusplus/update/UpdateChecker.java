@@ -220,34 +220,6 @@ public class UpdateChecker extends Fragment {
 		d.show(mContext.getSupportFragmentManager(), null);
 	}
 
-	/**
-	 * Show Notification
-	 * 
-	 */
-	/*
-	public void showNotification(String content,String apkUrl) {
-		android.app.Notification noti;
-		Intent myIntent = new Intent(mContext, DownloadService.class);
-		myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		myIntent.putExtra(Constants.APK_DOWNLOAD_URL, apkUrl);
-		PendingIntent pendingIntent = PendingIntent.getService(mContext, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-		int smallIcon = mContext.getApplicationInfo().icon;
-		noti = new NotificationCompat.Builder(mContext).setTicker(getString(R.string.newUpdateAvailable))
-				.setContentTitle(getString(R.string.newUpdateAvailable)).setContentText(content).setSmallIcon(smallIcon)
-				.setContentIntent(pendingIntent).build();
-
-		noti.flags = android.app.Notification.FLAG_AUTO_CANCEL;
-		NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-		notificationManager.notify(0, noti);
-	}
-	*/
-
-	
-
-	/**
-	 * Check if a network available
-	 */
 	public static boolean isNetworkAvailable(Context context) {
 		boolean connected = false;
 		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
